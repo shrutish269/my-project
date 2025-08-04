@@ -1,1 +1,74 @@
+EXPERIMENT-2: RESPONSIVE BANKING UI
 
+Student Name: Shruti Sharma
+Course: Full Stack development
+
+OBJECTIVES:
+
+To design and implement a responsive banking user Interface(UI) Using HTML and CSS that adapts seamlessly across different screen sizes (desktop, tablet, and mobile). This experiment Focuses on layout structuring, design asthetics, and the use of responsive web design principles such as flexbox, media queries, and mobile-first styling.
+
+DESCRIPTION:
+
+This experiment is aimed at building a basic yet modern-looking banking UI that includes essential sections found in real-world banking websites. The objective is not to build a fully functional web application , but to emphaisze visual design, responsiveness and structured layout.
+
+TECHNOLOGIES USED:
+
+1. Navigation Bar(Top):
+Includes links like Home, Services, Accounts, Contact.
+Styled using Flexbox to space items evenly.
+Responsive: Turns into a stacked menu on smaller screens.
+
+2.Hero Section (Main Banner):
+Includes a welcoming message like “Welcome to Your Trusted Bank”.
+Uses large, bold fonts with a background color or image.
+Ensures visual attraction and immediate understanding of purpose.
+
+3.Services Section:
+A section displaying 2–3 banking services such as:
+Online Banking
+Credit/Debit Card
+24/7 Support
+These are displayed using cards or boxes.
+Flex layout turns into vertical stacking on smaller screens.
+
+4.Footer Section:
+Contains contact details like:
+Toll-free number
+Support email
+Social media links
+Styled with a distinct background for clarity.
+
+
+CSS IMPLEMENTATION DETAILS:
+
+1. Used max-width containers to center content and control overflow.
+2. flex-wrap and justify-content were used in the services section to ensure equal spacing and alignment.
+3. All fonts and colors are chosen to ensure readability and contrast.
+4. Used media queries to change layouts at specific breakpoints:
+       ≥1024px: Desktop view with horizontal layout.
+       768px–1023px: Tablet view with medium-sized content blocks.
+       <768px: Mobile view with stacked content and smaller font sizes.
+
+
+OUTPUT PREVIEW:
+
+Desktop View: Full-width navigation, side-by-side service boxes, horizontal footer.
+
+Tablet View: Slightly scaled-down UI, service boxes in 2-column layout.
+
+Mobile View: Navigation becomes stacked, all sections take full width, optimized readability.
+
+
+LEARNING OUTCOMES:
+
+1.Understood how to build structured and semantic HTML layouts.
+2.Learned to apply CSS Flexbox for layout arrangement and alignment.
+3.Practiced using media queries to make designs fully responsive.
+4.Gained insight into designing user interfaces for real-world domains like banking.
+5.Learned how to apply a mobile-first approach and adapt UI across various devices.
+6.Improved visual thinking for UI/UX and user-friendly web presentation.
+
+
+Author:
+Shruti Sharma
+B.Tech CSE (AI & ML), Chandigarh University
