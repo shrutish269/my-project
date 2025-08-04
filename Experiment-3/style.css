@@ -1,0 +1,85 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --header-footer-bg: #4CAF50;
+    --sidebar-bg: #f4f4f4;
+    --link-color: #4b0082;
+}
+
+body.dark {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --header-footer-bg: #222;
+    --sidebar-bg: #1e1e1e;
+    --link-color: #ccccff;
+}
+
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 60px 1fr 40px;
+    height: 100vh;
+}
+
+.header {
+    grid-area: header;
+    background-color: var(--header-footer-bg);
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: var(--sidebar-bg);
+    padding: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li a {
+    text-decoration: underline;
+    color: var(--link-color);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.main {
+    grid-area:main;
+    padding: 20px;
+}
+
+.footer {
+    grid-area: footer;
+    background-color:var(--header-footer-bg);
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.theme-switch {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: white;
+}
