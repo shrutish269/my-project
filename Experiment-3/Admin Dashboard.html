@@ -2,20 +2,22 @@
 <html lang = "en">
 <head>
     <meta charset = "UTF-8" />
-    <meta name = "viewport" content = "width = device-width, initial scale = 1.0" />
+    <meta name = "viewport" content = "width=device-width, initial-scale = 1.0" />
     <title>Admin Dashboard</title>
     <link rel = "stylesheet" href = "style.css" />
 </head>
 
 <body>
+    <input type = "checkbox" id = "theme-toggle" class = "theme-input" />
+
    <div class = "dashboard">
     <header class = "header">
         <h1>Admin Dashboard</h1>
-        <label class = "theme switch">
-            <input type = "checkbox" id="theme-toggle">
+        <label class = "theme switch" for="theme-toggle">
             Dark Mode
         </label>
     </header>
+
     <nav class = "sidebar">
         <ul>
             <li><a href="#">Home</a></li>
@@ -33,7 +35,5 @@
         @ 2025 Admin Panel
     </footer>
    </div>
-
-   <script src="script.js"></script>
 </body>
 </html>
