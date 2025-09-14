@@ -17,7 +17,7 @@ INVALID INPUTS:
 Requirement: Required prop, numeric or string convertible to numeric (can include currency sign). Must be greater than 0.
 VALID INPUTS:
 
-"$25.99"
+"5.99"
 
 "1999"
 
