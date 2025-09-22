@@ -1,0 +1,77 @@
+LIVE CHARACTER COUNTER TEST CASES & VALIDATIONS  
+
+1. FIELD: Textarea (User Input)  
+   Requirement: Required means the field should not be empty if user starts typing.  
+   Only accepts normal text input (letters, numbers, symbols allowed).  
+   Validation is done by counting the total number of characters entered in real time.  
+
+   VALID INPUTS:  
+       "Hello World" → Character count: 11  
+       "123456" → Character count: 6  
+       "OpenAI GPT" → Character count: 10  
+
+   INVALID INPUTS:  
+       "" (empty) → Character count stays 0 (no input provided)  
+
+2. CHARACTER COUNT DISPLAY:  
+   Requirement: The counter should update live as the user types in the textarea.  
+   Every addition or deletion of text should immediately reflect in the counter.  
+
+   TEST CASES:  
+       Typing "Hi" → Counter shows 2  
+       Deleting "i" → Counter updates back to 1  
+       Clearing all text → Counter resets to 0  
+
+3. FIELD BEHAVIOR:  
+   Requirement: Textarea should allow continuous input without restrictions.  
+   Placeholder should disappear once typing begins.  
+
+   TEST CASES:  
+       Click inside textarea → Placeholder visible until first character is typed  
+       Type "abc" → Placeholder disappears, counter shows 3  
+       Delete all → Placeholder reappears, counter resets to 0  
+
+4. FORM SUBMISSION (Not applicable here):  
+   This project does not include a form submit button. Only live character counting functionality is tested.  
+
+
+CSS Styling Breakdown: A Structured Overview  
+
+1. ELEMENT: textarea::placeholder  
+   Purpose: Defines the font style for the placeholder text.  
+   Properties & Effects:  
+       font-family: Arial, Helvetica, sans-serif; → Ensures placeholder has clean, modern look.  
+       font-size: 16px; → Makes the placeholder text easy to read.  
+
+2. ELEMENT: #LiveCharacterCounter (Container Div)  
+   Purpose: Holds the heading, textarea, and character counter.  
+   Properties & Effects:  
+       margin: 10px; → Adds spacing around the entire container.  
+
+3. ELEMENT: h2 (Heading)  
+   Purpose: Displays the title "Live Character Counter".  
+   Properties & Effects:  
+       font-weight: bold; → Makes heading stand out.  
+       font-family: Arial, sans-serif; → Maintains consistency with overall text.  
+
+4. ELEMENT: textarea (User Input Area)  
+   Purpose: Area where user types input text.  
+   Properties & Effects:  
+       border: 1px solid #949494; → Creates subtle gray border.  
+       outline: none; → Removes default outline when selected.  
+       display: block; → Places textarea on its own line.  
+       width: 300px; height: 100px; → Sets fixed dimensions.  
+       font-family: Arial, sans-serif; → Ensures consistent text style.  
+       padding: 10px; → Adds spacing inside the textarea for better readability.  
+
+5. ELEMENT: p (Character Counter Display)  
+   Purpose: Shows the number of characters typed inside the textarea.  
+   Properties & Effects:  
+       font-weight: bold; → Makes the label stand out.  
+       font-family: Arial, sans-serif; → Matches with other text.  
+
+
+LEARNING OUTCOMES:  
+1. How to build a live character counter using HTML, CSS, and JavaScript.  
+2. Learnt how to use JavaScript event listeners (`input`) to capture user typing in real time.  
+3. Understood how to dynamically update the DOM (using `textContent`) to reflect user actions immediately.  
