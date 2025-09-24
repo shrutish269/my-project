@@ -1,0 +1,72 @@
+EXPERIMENT-11: PLAYING CARDS API USING EXPRESS.JS
+
+OBJECTIVE:
+-----------
+To create a RESTful API using Node.js and Express.js to manage a collection of playing cards. This experiment focuses on understanding routing, handling GET, POST, DELETE HTTP methods, and testing API endpoints using PowerShell or Postman.
+
+DESCRIPTION:
+------------
+In this experiment, we develop a simple API that stores a list of playing cards in memory. Each card has the following properties:
+1. ID
+2. Suit (Hearts, Spades, Diamonds, Clubs)
+3. Value (Ace, King, Queen, Jack, etc.)
+
+The API supports the following operations:
+
+1. GET /cards
+   Requirement: Retrieve all cards in the collection.
+   Response Example:
+       ID: 1
+       Suit: Hearts
+       Value: Ace
+       
+       ID: 2
+       Suit: Spades
+       Value: King
+       
+       ID: 3
+       Suit: Diamonds
+       Value: Queen
+
+2. POST /cards
+   Requirement: Add a new card to the collection.
+   Body: JSON object with "suit" and "value".
+   Example Input:
+       {
+           "suit": "Clubs",
+           "value": "Jack"
+       }
+   Example Response:
+       {
+           "id": 4,
+           "suit": "Clubs",
+           "value": "Jack"
+       }
+
+3. DELETE /cards/:id
+   Requirement: Remove a card by its ID.
+   Example Response:
+       {
+           "message": "Card deleted"
+       }
+
+STEPS PERFORMED:
+-----------------
+1. Created a Node.js project and installed Express.js.
+2. Developed index.js with GET, POST, and DELETE routes.
+3. Tested API endpoints using PowerShell's Invoke-RestMethod.
+4. Verified API functionality using Postman (GET, POST, DELETE).
+
+LEARNING OUTCOMES:
+-------------------
+1. Understanding Express.js routing and middleware.
+2. Performing CRUD operations using REST API methods.
+3. Testing APIs using PowerShell and Postman.
+4. Managing in-memory data in Node.js applications.
+
+TOOLS AND TECHNOLOGIES USED:
+-----------------------------
+- Node.js
+- Express.js
+- Visual Studio Code
+- PowerShell / Postman
