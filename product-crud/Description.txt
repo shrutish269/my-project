@@ -1,0 +1,105 @@
+PRODUCT CRUD MODULE – TEST CASES & VALIDATIONS
+
+1. FIELD: Product Name
+Requirement: Required field – cannot be empty
+Only uppercase/lowercase alphabets, numbers, and spaces allowed (pattern = [A-Za-z0-9\s]+)
+No special characters permitted
+VALID INPUTS:
+- "Apple iPhone 15"
+- "Samsung Galaxy S23 Ultra"
+- "Dell XPS 13"
+INVALID INPUTS:
+- "iPhone@15" – Contains special character
+- "Dell#XPS" – Contains hash symbol
+- "" (empty) – Should trigger required error
+
+2. FIELD: Price
+Requirement: Required field – cannot be empty
+Must be numeric and greater than 0
+Decimal values allowed (e.g., 999.99)
+VALID INPUTS:
+- 499
+- 1299.99
+- 1 – Minimum valid price
+INVALID INPUTS:
+- "" (empty) – Should trigger required error
+- 0 – Price cannot be zero
+- -100 – Negative price is invalid
+- "abc" – Non-numeric input
+
+3. FIELD: Category
+Requirement: Required field – must be selected from predefined options
+Dropdown or select input expected
+VALID INPUTS:
+- "Electronics"
+- "Home Appliances"
+- "Books"
+INVALID INPUTS:
+- "" (empty) – No category selected
+- "Gadgets123" – Not part of predefined list
+- " " – Blank space
+
+4. FIELD: Description
+Requirement: Optional field
+If provided, must be at least 10 characters and not exceed 500 characters
+VALID INPUTS:
+- "High-performance laptop with 16GB RAM and 512GB SSD."
+- "Eco-friendly refrigerator with inverter technology."
+INVALID INPUTS:
+- "Good" – Too short
+- "" – Valid (optional field)
+- Long paragraph exceeding 500 characters – Should trigger max length error
+
+5. FORM SUBMISSION
+- Submit with all valid fields → Success
+- Submit with 1+ invalid fields → Form should not submit, browser displays validation messages
+
+CSS STYLING BREAKDOWN: A STRUCTURED OVERVIEW
+
+1. ELEMENT: body (Page Background)
+Purpose: Sets the background tone
+- background-color: #f4f4f4; – Light gray for neutral tone
+- margin-top: 20vh; – Pushes form down by 20% of viewport height
+
+2. ELEMENT: .form-container (Main Form Wrapper)
+Purpose: Styles the form box
+- background-color: #ffffff; – Clean white box
+- margin: 30px auto; – Centers form
+- padding: 25px 35px; – Comfortable spacing
+- border-radius: 10px; – Rounded corners
+- box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); – Soft elevation
+- max-width: 600px; – Responsive width
+
+3. ELEMENT: .form-header (Form Title Section)
+Purpose: Styles heading
+- text-align: center; – Centers title
+
+4. ELEMENT: .form-group (Label-Input Pairs)
+Purpose: Separates each input
+- margin-bottom: 18px; – Adds spacing
+
+5. ELEMENT: .form-group input, textarea, select
+Purpose: Styles all input fields
+- width: 100%; – Full width
+- padding: 10px; – Comfortable typing space
+- border: 1px solid #ccc; – Light border
+- border-radius: 5px; – Rounded edges
+- font-size: 16px; – Readable text
+
+6. ELEMENT: .btn-submit (Submit Button)
+Purpose: Styles the "Add Product" button
+- width: 100%; – Full width
+- padding: 12px; – Clickable area
+- background-color: #28a745; – Green for success
+- color: white; – Contrast text
+- border: none; – Clean look
+- border-radius: 5px; – Rounded corners
+- font-size: 18px; – Prominent text
+- margin-top: 12px; – Space above button
+
+LEARNING OUTCOMES
+- How to build a full Product CRUD backend using Node.js, Express, and MongoDB
+- Implemented HTML5 validations and backend schema validations using Mongoose
+- Learned to test API endpoints using Postman
+- Understood how to handle form errors and display validation feedback
+- Practiced styling forms with clean, responsive CSS
