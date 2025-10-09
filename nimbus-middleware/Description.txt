@@ -1,0 +1,126 @@
+NIMBUS MIDDLEWARE
+1. COMPONENT: Logger Middleware
+Requirement:
+This middleware logs every incoming HTTP request made to the server. It records essential details such as the request method, URL, and timestamp.
+
+Function Used:
+
+js
+Copy code
+function logger(req, res, next) {
+  const ts = new Date().toISOString();
+  console.log(`[${ts}] ${req.method} ${req.originalUrl}`);
+  next();
+}
+Purpose:
+
+To monitor server activity in real-time.
+
+To track when and how often certain routes are accessed.
+
+To help debug issues by showing request flow through the server.
+
+VALID SCENARIOS:
+
+Visiting /public or /protected logs output like:
+[2025-10-09T07:45:00.000Z] GET /public
+[2025-10-09T07:45:10.000Z] GET /protected
+
+EXPECTED OUTPUT:
+Every request (public or protected) should generate a console log with accurate method and timestamp.
+
+2. COMPONENT: Bearer Token Authentication Middleware
+Requirement:
+This middleware ensures that only clients with a valid Bearer token can access protected routes.
+
+Function Used:
+
+js
+Copy code
+function authenticateBearer(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  if (!authHeader || typeof authHeader !== 'string' || !authHeader.toLowerCase().startsWith('bearer ')) {
+    return res.status(401).json({ message: "Authorization header missing or incorrect" });
+  }
+
+  const token = authHeader.split(' ')[1];
+  if (token !== REQUIRED_TOKEN) {
+    return res.status(401).json({ message: "Authorization header missing or incorrect" });
+  }
+
+  next();
+}
+Purpose:
+
+To protect sensitive routes from unauthorized access.
+
+To demonstrate secure API access using Bearer tokens.
+
+To implement token validation logic before route access.
+
+VALID INPUTS:
+
+Header: Authorization: Bearer mysecrettoken
+
+Access /protected → Response: 200 OK
+
+Message: "You have accessed a protected route with a valid Bearer token!"
+
+INVALID INPUTS:
+
+Missing Authorization header
+
+Response: 401 Unauthorized
+
+Message: "Authorization header missing or incorrect"
+
+Wrong token value (e.g., Bearer wrongtoken)
+
+Response: 401 Unauthorized
+
+Message: "Authorization header missing or incorrect"
+
+3. ROUTES
+Route	Type	Authentication Required	Description
+/	GET	❌ No	Root route showing server status.
+/public	GET	❌ No	Accessible by anyone. Returns public message.
+/protected	GET	✅ Yes	Requires valid Bearer token. Returns protected message.
+
+Sample Outputs:
+
+GET /public → This is a public route. No authentication required.
+
+GET /protected (with valid token) → You have accessed a protected route with a valid Bearer token!
+
+GET /protected (no token) → 401 Unauthorized
+
+4. SERVER SETUP
+Command Used:
+
+bash
+Copy code
+node app.js
+Output in Terminal:
+
+arduino
+Copy code
+Server listening at http://localhost:3000
+Access URLs:
+
+Public Route → http://localhost:3000/public
+
+Protected Route → http://localhost:3000/protected
+
+CSS Styling Breakdown: Not Applicable
+(This experiment focuses on backend middleware functionality, not frontend design.)
+
+LEARNING OUTCOMES
+Learnt how to create and use Express middleware in Node.js.
+
+Understood how to implement logging middleware for request tracking.
+
+Implemented Bearer token authentication middleware for protected routes.
+
+Gained understanding of how middleware functions execute sequentially using the next() method.
+
+Learnt how to test both public and protected API endpoints using tokens and headers.
