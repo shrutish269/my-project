@@ -1,0 +1,72 @@
+## MONGODB TRANSFER API EXPERIMENT
+
+### OVERVIEW:
+This experiment demonstrates how to build a backend API using **Express.js** and **MongoDB** for managing user accounts and handling money transfers. It includes user creation, modular routing, and database connectivity using environment variables for secure configuration.
+
+---
+
+### ROUTES & VALIDATIONS
+
+#### 1. ROUTE: `/create-users`
+- **Purpose**: Initializes the database with two sample users: Alice and Bob.
+- **Requirements**:
+  - No input required in the request body.
+  - Automatically inserts predefined user objects into the MongoDB collection.
+- **Valid Output**:
+  ```json
+  {
+    "message": "Users created",
+    "users": [
+      { "name": "Alice", "balance": 1000 },
+      { "name": "Bob", "balance": 500 }
+    ]
+  }
+  ```
+- **Error Handling**:
+  - If MongoDB connection fails or insertion throws an error, returns:
+    ```json
+    {
+      "message": "Error creating users",
+      "error": "<error message>"
+    }
+    ```
+
+---
+
+#### 2. ROUTE: `/transfer` (Defined in `routes/transfer.js`)
+- **Purpose**: Handles money transfer logic between users.
+- **Requirements**:
+  - Must include sender, receiver, and amount in the request body.
+  - Validates sufficient balance before proceeding.
+- **Expected Behavior**:
+  - Deducts amount from sender.
+  - Adds amount to receiver.
+  - Returns success message with updated balances.
+- **Error Handling**:
+  - Missing fields → 400 Bad Request.
+  - Insufficient balance → 400 Bad Request.
+  - Invalid user IDs → 404 Not Found.
+
+---
+
+### CONFIGURATION & SETUP
+
+- **Environment Variables**:
+  - `MONGO_URI`: MongoDB connection string stored securely in `.env`.
+  - `PORT`: Server port number, also stored in `.env`.
+
+- **Database**:
+  - Uses **Mongoose** to connect to MongoDB and define the `User` model.
+  - Each user has:
+    - `name`: String
+    - `balance`: Number
+
+---
+
+### LEARNING OUTCOMES
+1. How to connect a Node.js app to MongoDB using Mongoose.
+2. How to modularize routes using Express Router.
+3. How to insert multiple documents using `insertMany`.
+4. How to handle money transfers with proper validation and error handling.
+5. How to use environment variables for secure configuration.
+
