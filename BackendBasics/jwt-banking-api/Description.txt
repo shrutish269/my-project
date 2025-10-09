@@ -1,0 +1,101 @@
+JWT AUTHORIZATION EXPERIMENT
+
+### OVERVIEW:
+This experiment demonstrates how to implement secure user authentication and protected API access using **JSON Web Tokens (JWT)** in a Node.js + Express backend. It simulates a simple banking system with login, balance inquiry, deposit, and withdrawal routes — all guarded by token-based authorization.
+
+---
+
+###  ROUTES & VALIDATIONS
+
+#### 1. ROUTE: `/login`
+- **Purpose**: Authenticates user credentials and issues a JWT token valid for 1 hour.
+- **Requirements**:
+  - Request body must include `username` and `password`.
+  - Credentials must match the dummy user object.
+- **Valid Input**:
+  ```json
+  {
+    "username": "user1",
+    "password": "password123"
+  }
+  ```
+- **Invalid Input**:
+  - Missing fields → triggers 401 Unauthorized.
+  - Incorrect credentials → triggers 401 Unauthorized.
+
+---
+
+#### 2. MIDDLEWARE: `verifyToken`
+- **Purpose**: Protects sensitive routes by validating JWT tokens.
+- **Requirements**:
+  - Authorization header must be present in format `Bearer <token>`.
+  - Token must be valid and not expired.
+- **Valid Input**:
+  - Header: `Authorization: Bearer <valid_token>`
+- **Invalid Input**:
+  - Missing header → 403 Forbidden.
+  - Malformed token → 403 Forbidden.
+  - Expired token → 403 Forbidden.
+
+---
+
+#### 3. ROUTE: `/balance`
+- **Purpose**: Returns current account balance.
+- **Requirements**:
+  - Must pass `verifyToken` middleware.
+- **Valid Input**:
+  - Authenticated request with valid token.
+- **Output**:
+  ```json
+  {
+    "balance": 1000
+  }
+  ```
+
+---
+
+#### 4. ROUTE: `/deposit`
+- **Purpose**: Adds funds to the account.
+- **Requirements**:
+  - Must pass `verifyToken` middleware.
+  - Request body must include a positive `amount`.
+- **Valid Input**:
+  ```json
+  {
+    "amount": 500
+  }
+  ```
+- **Invalid Input**:
+  - Missing or non-positive amount → 400 Bad Request.
+
+---
+
+#### 5. ROUTE: `/withdraw`
+- **Purpose**: Deducts funds from the account.
+- **Requirements**:
+  - Must pass `verifyToken` middleware.
+  - Request body must include a positive `amount`.
+  - Amount must not exceed current balance.
+- **Valid Input**:
+  ```json
+  {
+    "amount": 200
+  }
+  ```
+- **Invalid Input**:
+  - Missing or non-positive amount → 400 Bad Request.
+  - Amount exceeds balance → 400 Bad Request.
+
+---
+
+### CSS STYLING BREAKDOWN (If UI is added later)
+Not applicable in this backend-only experiment, but similar styling principles can be applied to frontend forms for login and transaction inputs.
+
+---
+
+### LEARNING OUTCOMES
+1. How to implement JWT-based authentication in Express.
+2. How to protect routes using middleware.
+3. How to validate request payloads and handle errors gracefully.
+4. How to simulate a secure banking API with login, deposit, withdrawal, and balance inquiry.
+
