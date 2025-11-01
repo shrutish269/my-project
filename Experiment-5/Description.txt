@@ -1,0 +1,139 @@
+Dynamic Product Filter COMPONENTS & VALIDATIONS 
+
+1. COMPONENT: Dropdown (Category Selection)
+
+Requirement:
+
+Must allow the user to select product categories: All, Clothing, Electronics, Books.
+
+Default should be All, which displays all products.
+
+VALID INPUTS:
+
+Selecting All → Displays all products (Clothing, Electronics, Books).
+
+Selecting Clothing → Displays only T-Shirt, Jeans.
+
+Selecting Electronics → Displays only Headphones, Smartphone.
+
+Selecting Books → Displays only Novel, Cookbook.
+
+INVALID CASES:
+
+If the dropdown has no value → No products should display.
+
+If dropdown is missing or broken → User cannot filter (invalid design).
+
+2. COMPONENT: Product List (Filtering by Data Attribute)
+
+Requirement:
+
+Each product is represented by a div with data-category attribute.
+
+Products must show/hide dynamically when the dropdown changes.
+
+VALID BEHAVIOR:
+
+data-category="clothing" items appear when Clothing is selected.
+
+data-category="electronics" items appear when Electronics is selected.
+
+data-category="books" items appear when Books is selected.
+
+INVALID BEHAVIOR:
+
+If a product is missing data-category → It will not filter properly.
+
+If all products are hidden when All is selected → Incorrect design.
+
+3. COMPONENT: Filtering Logic (JavaScript Event Handling)
+
+Requirement:
+
+JavaScript must listen for change event on dropdown.
+
+Must hide products not matching selected category.
+
+Must show all products when “All” is selected.
+
+VALID CASES:
+
+Selecting Electronics → Immediately hides Clothing and Books.
+
+Selecting Books → Only Books category remains visible.
+
+Switching back to All → All products appear again.
+
+INVALID CASES:
+
+Dropdown event not firing → Products remain static (not filtered).
+
+Products not hiding properly (e.g., still showing unrelated categories).
+
+CSS Styling Breakdown: A Structured Overview
+1. ELEMENT: body (Page Background)
+
+Purpose: Defines the overall font and margin for the page.
+
+Properties:
+
+font-family: Arial, sans-serif; → Clean readable text.
+
+margin: 20px; → Provides spacing around the page.
+
+2. ELEMENT: .container (Main Box)
+
+Purpose: Wraps dropdown and product list.
+
+Properties:
+
+border: 1px solid #ccc; → Light gray border.
+
+padding: 15px; → Internal spacing.
+
+border-radius: 5px; → Rounded corners.
+
+max-width: 500px; → Keeps layout compact.
+
+3. ELEMENT: h2 (Heading)
+
+Purpose: Title of the product list.
+
+Properties:
+
+margin-top: 0; → Removes default extra space.
+
+4. ELEMENT: select (Dropdown Styling)
+
+Purpose: Makes the dropdown visually distinct.
+
+Properties:
+
+margin-bottom: 15px; → Adds spacing below dropdown.
+
+padding: 5px; → Comfortable click area.
+
+5. ELEMENT: .product (Individual Items)
+
+Purpose: Styles each product card.
+
+Properties:
+
+border: 1px solid #ddd; → Light border around items.
+
+padding: 10px; → Internal spacing for readability.
+
+margin: 5px 0; → Spacing between items.
+
+border-radius: 4px; → Rounded edges for aesthetics.
+
+LEARNING OUTCOMES
+Learnt how to create a dynamic product filter using HTML, CSS, and JavaScript.
+
+Understood the use of data attributes (data-category) for classification.
+
+Practiced event handling (change event) in JavaScript.
+
+Implemented DOM manipulation to hide/show elements dynamically.
+
+Improved UI design skills using CSS for container, dropdown, and product cards.

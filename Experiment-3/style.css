@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+:root {
+    --bg-color: #f4f4f4;
+    --text-color: #222;
+    --header-bg:#4caf50;
+    --header-text: #fff;
+    --sidebar-bg: #eaeaea;
+    --sidebar-text: #333;
+    --main-bg: #fff;
+    --footer-bg: #4caf50;
+    --footer-text: #fff;
+
+}
+
+#theme-toggle:checked ~ .dashboard {
+    --bg-color: #181818;
+    --text-color: #f0f0f0;
+    --header-bg: #333;
+    --header-text: #fff;
+    --sidebar-bg: #222;
+    --sidebar-text: #ccc;
+    --main-bg: #1f1f1f;
+    --footer-bg: #333;
+    --footer-text: #ccc;
+}
+
+
+.dashboard {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+    grid-template-columns: 200px 1fr;
+    height: 100vh;
+}
+
+.header {
+    grid-area: header;
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: var(--sidebar-bg);
+    padding: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    color: var(--sidebar-text);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sidebar ul li a:hover {
+    color: var(--header-bg);
+}
+
+.main {
+    grid-area: main;
+    padding: 20px;
+    background-color: var(--main-bg);
+}
+
+.footer {
+    grid-area: footer;
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    text-align: center;
+    padding: 10px;
+}
+
+.theme-input {
+    display: none;
+}
+
+.theme-switch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.switch-track {
+    width: 36px;
+    height: 18px;
+    background: #ccc;
+    border-radius: 20px;
+    position: relative;
+    transition: background 0.3s;
+}
+
+.switch-thumb {
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+}
+
+#theme-toggle:checked ~ .dashboard .switch-track {
+    background: #4caf50;
+}
+
+#theme-toggle:checked ~ .dashboard .switch-thumb {
+    transform: translateX(18px);
+}

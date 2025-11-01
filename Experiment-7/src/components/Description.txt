@@ -1,0 +1,104 @@
+PRODUCT CARD COMPONENT – TEST CASES & VALIDATIONS
+1. PROP: name
+Requirement: Required prop, cannot be empty. Only uppercase/lowercase alphabets, numbers, and spaces allowed (pattern = [A-Za-z0-9\s]+)
+VALID INPUTS:
+
+"Wireless Mouse"
+
+"HP Laptop 15s"
+
+INVALID INPUTS:
+
+"" (empty) – should trigger missing prop warning
+
+"Mouse@123" – contains invalid special character
+
+2. PROP: price
+Requirement: Required prop, numeric or string convertible to numeric (can include currency sign). Must be greater than 0.
+VALID INPUTS:
+
+"5.99"
+
+"1999"
+
+2500
+
+INVALID INPUTS:
+
+"" – empty value
+
+"-50" – negative price invalid
+
+"free" – non-numeric string invalid
+
+3. PROP: stockStatus
+Requirement: Required prop, indicates whether product is available. Only allowed values: "In Stock" or "Out of Stock".
+VALID INPUTS:
+
+"In Stock"
+
+"Out of Stock"
+
+INVALID INPUTS:
+
+"Available Soon" – not defined
+
+"" – empty
+
+4. COMPONENT USAGE
+Passing all valid props will render a styled Product Card correctly.
+Missing or invalid props should show fallback messages or browser console warnings.
+
+CSS Styling Breakdown
+Here’s a breakdown of the CSS styles, organized by the element they target and their purpose:
+
+1. ELEMENT: .product-card (Main Card Wrapper)
+
+Purpose: Styles the box containing product details.
+
+Properties & Effects:
+
+background-color: #ffffff; – clean white background
+
+padding: 20px; – internal spacing for readability
+
+margin: 20px auto; – centers card
+
+border-radius: 8px; – rounded corners
+
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); – subtle shadow for raised look
+
+max-width: 300px; – keeps card compact
+
+2. ELEMENT: .product-name
+
+Purpose: Highlights the product name.
+
+Property: font-size: 20px; font-weight: bold;
+
+3. ELEMENT: .product-price
+
+Purpose: Displays product price clearly.
+
+Property: font-size: 18px; color: #4a90e2;
+
+4. ELEMENT: .stock-status
+
+Purpose: Shows stock availability.
+
+Properties & Effects:
+
+font-size: 16px;
+
+color: green; (if In Stock)
+
+color: red; (if Out of Stock)
+
+LEARNING OUTCOMES
+How to create a reusable React component using props.
+
+How to validate and test dynamic data passed to components.
+
+How to style a card layout consistently using CSS.
+
+How to dynamically render multiple product cards without altering component code.

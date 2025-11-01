@@ -1,0 +1,90 @@
+EMPLOYEE MANAGEMENT SYSTEM – TEST CASES & VALIDATIONS
+1. FUNCTIONALITY: Add Employee
+Requirement:
+
+Both Name and ID fields are required.
+
+Employee ID must be unique (no duplicates allowed).
+
+VALID INPUTS:
+
+Name: "Alice" , ID: "E104"
+
+Name: "Bob" , ID: "E105"
+
+INVALID INPUTS:
+
+Name empty → should trigger Name and ID are required.
+
+ID empty → should trigger Name and ID are required.
+
+Duplicate ID → e.g., trying to add ID "E101" again triggers An employee with ID E101 already exists.
+
+2. FUNCTIONALITY: List Employees
+Requirement:
+
+Lists all employees in the system with their Name and ID.
+
+If no employees exist, display "No employees found."
+
+VALID INPUTS:
+
+After adding employees, selecting list shows all current employees.
+
+INVALID INPUTS:
+
+Not applicable (listing always works; empty list handled).
+
+3. FUNCTIONALITY: Remove Employee
+Requirement:
+
+Employee ID is required to remove an employee.
+
+If the ID does not exist, display "Employee with ID <ID> not found."
+
+VALID INPUTS:
+
+ID exists → employee is removed and message "Employee <name> (ID: <ID>) removed successfully." displayed.
+
+INVALID INPUTS:
+
+ID does not exist → triggers "Employee with ID <ID> not found."
+
+Empty ID input → triggers "Employee with ID <ID> not found."
+
+4. APPLICATION FLOW
+Menu repeatedly displays until user selects Exit.
+
+Options:
+
+Add Employee
+
+List Employees
+
+Remove Employee
+
+Exit
+
+Behavior:
+
+Input outside 1–4 → triggers "Invalid choice. Please enter 1-4."
+
+Exit → prints "Goodbye!" and stops program.
+
+5. VALIDATION SUMMARY
+Feature	Validation
+Name & ID required	Cannot be empty; must provide values
+ID uniqueness	No duplicate IDs allowed
+Menu input	Only numbers 1–4 allowed; other inputs trigger invalid choice message
+Remove Employee	ID must exist; otherwise error message displayed
+
+LEARNING OUTCOMES
+How to implement a CLI-based employee management system in Node.js.
+
+Using async/await with Node.js readline for interactive input.
+
+Validating inputs and handling edge cases like duplicates or missing data.
+
+Understanding arrays and object manipulation in JavaScript.
+
+Running test cases to verify add, list, and remove employee operations.

@@ -1,0 +1,61 @@
+CONCURRENT TICKET BOOKING SYSTEM WITH SEAT LOCKING AND CONFIRMATION
+
+1. FIELD: Seat Viewing
+
+Requirement: Allows users to see the status of all seats.
+
+Valid Output: Displays seats with their status as available, locked, or booked.
+
+Invalid Output: Requesting an undefined seat number should show an error message.
+
+2. FIELD: Lock Seat
+
+Requirement: Temporarily lock a seat before confirming the booking.
+
+Valid Input: Seat number that is available.
+
+Valid Output:
+
+json
+Copy code
+{ "message": "Seat 5 locked successfully. Confirm within 1 minute." }
+Invalid Input/Output: Locking an already locked or booked seat:
+
+json
+Copy code
+{ "message": "Seat is already locked or booked." }
+3. FIELD: Confirm Seat
+
+Requirement: Confirm the booking of a previously locked seat.
+
+Valid Input: Seat number that is currently locked.
+
+Valid Output:
+
+json
+Copy code
+{ "message": "Seat 5 booked successfully!" }
+Invalid Input/Output: Confirming a seat that is not locked:
+
+json
+Copy code
+{ "message": "Seat is not locked and cannot be booked." }
+4. API TESTING:
+
+GET /seats → Returns the current seat availability.
+
+POST /lock/:seatNumber → Locks a specific seat.
+
+POST /confirm/:seatNumber → Confirms a specific seat booking.
+
+Test concurrent requests to ensure the locking mechanism prevents double booking.
+
+LEARNING OUTCOMES:
+
+How to implement a ticket booking system using Node.js and Express.js.
+
+How to handle in-memory data structures for seat states.
+
+Learn to implement seat locking to prevent race conditions.
+
+How to handle API endpoints and test them using Postman.

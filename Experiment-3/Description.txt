@@ -1,0 +1,96 @@
+ADMIN DASHBOARD UI - LAYOUT & COMPONENTS
+
+1. COMPONENT: HEADER
+
+Requirement: fixed at the top, spanning the full width of the page, containing the dashboard title on the left 
+and "DARK MODE" toggle on the right.
+~ Displays the text "Admin Dashboard" in bold white.
+~ Provides a toggle button labeled "Dark Mode" (UI only, no functionality).
+
+VALID DESIGN:
+~ Title is visible, aligned left.
+~ Dark Mode toggle visible, aligned right.
+
+INVALID DESIGN:
+~ Missing title text.
+~ Dark Mode toggle not aligned properly or missing.
+
+2. COMPONENT: SIDEBAR NAVIGATION:
+
+Requirement: Vertical navigation bar fixed on the left side of the layout. 
+~ Must contain navigation links: Home, Users, and Settings.
+~ Links should ne clickable (UI navigation only , no redirection in this experiment).
+
+VALID DESIGN: 
+~ All 3 links visible and vertically aligned.
+
+INVALID DESIGN:
+~ Missing one or more links.
+~ Links not vertically aligned or overlapping.
+
+3. COMPONENT: Main Content Area
+Requirement: Displays a welcome message for the admin and acts as the primary space for charts, tables, and reports in a real-world scenario.
+~ Heading: "Welcome, Admin!" (bold, prominent).
+~ Subtext: "This is the main content area. Add charts, tables, or reports here."
+
+VALID DESIGN:
+~ Heading is bold and clearly visible.
+~ Subtext present below the heading.
+
+INVALID DESIGN:
+~ Missing heading or subtext.
+~ Text not aligned properly with layout.
+
+4. COMPONENT: Footer
+Requirement: Fixed at the bottom, spanning the full width.
+~ Displays copyright: "@ 2025 Admin Panel".
+
+VALID DESIGN:
+~ Footer spans entire width.
+~ Text is centered and visible.
+
+INVALID DESIGN:
+~ Footer missing or not fixed at bottom.
+~ Text misaligned or clipped.
+
+CSS STYLING BREAKDOWN – A STRUCTURED OVERVIEW: 
+1. ELEMENT: body (Page Background)
+Purpose: Defines overall background and removes unwanted spacing.
+Property: margin: 0; → Removes default margin.
+Property: font-family: Arial, sans-serif; → Sets a clean, readable font.
+
+2. ELEMENT: .header (Top Section)
+Purpose: Styles the green top header bar.
+background-color: #4CAF50; → Solid green background.
+color: white; → White text for contrast.
+padding: 20px; → Spacing inside header.
+display: flex; justify-content: space-between; align-items: center; → Aligns title left, toggle right.
+
+3. ELEMENT: .sidebar (Left Navigation Bar)
+Purpose: Styles the vertical navigation section.
+background-color: #f4f4f4; → Light gray background.
+padding: 15px; → Spacing for links.
+width: 200px; → Fixed width for sidebar.
+height: calc(100vh - 100px); → Full height minus header/footer.
+
+4. ELEMENT: .main-content (Content Display Area)
+Purpose: Styles the main workspace section.
+flex: 1; → Takes remaining space beside sidebar.
+padding: 20px; → Adds spacing inside content.
+
+5. ELEMENT: .footer (Bottom Section)
+Purpose: Styles the green bottom footer.
+background-color: #4CAF50; → Matches header color.
+color: white; → White text for contrast.
+text-align: center; → Centers footer text.
+padding: 10px; → Adds vertical spacing.
+
+LEARNING OUTCOMES
+~ How to design a responsive Admin Dashboard layout using HTML and CSS.
+~ Learnt flexbox usage for arranging header, sidebar, and main content.
+~ Understood semantic structuring of HTML for UI components.
+~ Applied consistent color scheme and layout alignment principles.
+
+Submitted By: Shruti Sharma
+Experiment No.: 3 – Responsive Admin Dashboard UI
+Course: B.Tech CSE (AI & ML)
