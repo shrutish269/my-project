@@ -1,6 +1,0 @@
-client/node_modules
-client/build
-.git
-.gitignore
-Dockerfile
-README.md
