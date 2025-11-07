@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+  api:
+    build: .
+    command: npm run dev
+    volumes:
+      - .:/app
+    ports:
+      - "4000:4000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/ecommerce
+volumes:
+  mongo-data:
