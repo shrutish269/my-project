@@ -1,135 +1,143 @@
-import { gql } from "apollo-server-express";
+const { gql } = require('apollo-server-express');
 
-const typeDefs = gql`
+module.exports = gql`
   scalar DateTime
-  scalar Decimal
+  scalar JSON
 
-  # ================== TYPES ==================
-  type Category {
-    _id: ID!
+  enum Role { ADMIN CUSTOMER }
+
+  type User {
+    id: ID!
+    email: String!
     name: String!
-    description: String
+    role: Role!
+    cart: [CartItem!]!
     createdAt: DateTime
-    updatedAt: DateTime
+  }
+
+  type Category {
+    id: ID!
+    name: String!
+    slug: String!
+    createdAt: DateTime
   }
 
   type Product {
-    _id: ID!
+    id: ID!
     name: String!
+    slug: String!
     description: String
-    price: Decimal!
+    price: Float!
+    currency: String!
     inStock: Boolean!
+    quantity: Int!
+    attributes: JSON
+    popularity: Int
     category: Category
     createdAt: DateTime
-    updatedAt: DateTime
   }
 
-  type User {
-    _id: ID!
-    username: String!
-    email: String!
-    role: String!
-    createdAt: DateTime
+  type CartItem {
+    product: Product!
+    quantity: Int!
+  }
+
+  type OrderItem {
+    product: Product!
+    quantity: Int!
+    price: Float!
   }
 
   type Order {
-    _id: ID!
-    products: [Product!]!
-    total: Decimal!
+    id: ID!
+    items: [OrderItem!]!
+    total: Float!
     user: User!
-    status: String!
     createdAt: DateTime
-    updatedAt: DateTime
+    status: String!
   }
 
-  # ================== INPUTS ==================
-  input ProductFilterInput {
-    categoryIds: [ID!]
-    priceMin: Decimal
-    priceMax: Decimal
-    inStock: Boolean
-    search: String
+  type ProductEdge {
+    node: Product!
+    cursor: String!
   }
 
-  input ProductSortInput {
-    field: String! # "price", "createdAt", "popularity"
-    order: Int!    # 1 = ASC, -1 = DESC
-  }
-
-  input AddProductInput {
-    name: String!
-    description: String
-    price: Decimal!
-    inStock: Boolean!
-    categoryId: ID!
-  }
-
-  input UpdateProductInput {
-    name: String
-    description: String
-    price: Decimal
-    inStock: Boolean
-    categoryId: ID
-  }
-
-  input AddCategoryInput {
-    name: String!
-    description: String
-  }
-
-  input UpdateCategoryInput {
-    name: String
-    description: String
-  }
-
-  input CreateUserInput {
-    username: String!
-    email: String!
-    password: String!
-  }
-
-  input PlaceOrderInput {
-    productIds: [ID!]!
-  }
-
-  # ================== PAGINATION ==================
   type ProductConnection {
-    edges: [Product!]!
+    edges: [ProductEdge!]!
     totalCount: Int!
+    pageInfo: PageInfo!
   }
 
-  type CategoryConnection {
-    edges: [Category!]!
-    totalCount: Int!
+  type PageInfo {
+    hasNextPage: Boolean!
+    endCursor: String
   }
 
-  # ================== QUERIES ==================
+  input AddToCartInput {
+    productId: ID!
+    quantity: Int!
+  }
+
+  input UpdateCartItemInput {
+    productId: ID!
+    quantity: Int!
+  }
+
+  input ProductFilter {
+    search: String
+    categoryIds: [ID!]
+    minPrice: Float
+    maxPrice: Float
+    inStock: Boolean
+    attributes: JSON
+    orFilters: [ProductFilter!]
+    andFilters: [ProductFilter!]
+  }
+
+  input SortInput {
+    field: String!
+    direction: String!
+  }
+
   type Query {
-    products(filter: ProductFilterInput, sort: ProductSortInput, limit: Int, offset: Int): ProductConnection!
-    product(id: ID!): Product
-    categories(limit: Int, offset: Int): CategoryConnection!
-    category(id: ID!): Category
-    orders: [Order!]!
-    order(id: ID!): Order
     me: User
+    categories: [Category!]!
+    category(id: ID!): Category
+    products(first: Int, offset: Int, filter: ProductFilter, sort: SortInput): ProductConnection!
+    product(id: ID!): Product
+    order(id: ID!): Order
+    myOrders: [Order!]!
+    meCart: [CartItem!]!
   }
 
-  # ================== MUTATIONS ==================
   type Mutation {
-    addCategory(input: AddCategoryInput!): Category!
-    updateCategory(id: ID!, input: UpdateCategoryInput!): Category!
-    deleteCategory(id: ID!): Boolean!
+    login(email: String!, password: String!): String!
 
-    addProduct(input: AddProductInput!): Product!
-    updateProduct(id: ID!, input: UpdateProductInput!): Product!
+    addToCart(input: AddToCartInput!): CartItem!
+    updateCartItem(input: UpdateCartItemInput!): CartItem
+    removeFromCart(productId: ID!): Boolean!
+
+    createProduct(input: ProductCreateInput!): Product!
+    updateProduct(id: ID!, input: ProductCreateInput!): Product!
     deleteProduct(id: ID!): Boolean!
 
-    registerUser(input: CreateUserInput!): User!
-    login(email: String!, password: String!): String! # returns JWT token
+    createCategory(name: String!, slug: String!): Category!
+    updateCategory(id: ID!, name: String!, slug: String!): Category!
+    deleteCategory(id: ID!): Boolean!
 
-    placeOrder(input: PlaceOrderInput!): Order!
+    placeOrder: Order!
     updateOrderStatus(id: ID!, status: String!): Order!
   }
-`;
 
-export default typeDefs;
+  input ProductCreateInput {
+    name: String!
+    slug: String!
+    description: String
+    price: Float!
+    currency: String!
+    quantity: Int!
+    categoryId: ID
+    attributes: JSON
+    popularity: Int
+  }
+`;

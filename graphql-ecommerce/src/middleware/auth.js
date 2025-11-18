@@ -1,17 +1,12 @@
-import jwt from "jsonwebtoken";
-import User from "../models/User.js";
-import { JWT_SECRET } from "../config.js";
+const { getUserFromToken } = require('../utils/auth');
 
-const authMiddleware = async (req) => {
-  const token = req.headers.authorization || "";
-  if (!token) return { user: null };
+module.exports = async function authMiddleware(req, res, next) {
   try {
-    const decoded = jwt.verify(token.replace("Bearer ", ""), JWT_SECRET);
-    const user = await User.findById(decoded.id);
-    return { user };
+    const authHeader = req.headers.authorization || '';
+    const user = await getUserFromToken(authHeader);
+    req.user = user;
   } catch (err) {
-    return { user: null };
+    req.user = null;
   }
+  next();
 };
-
-export default authMiddleware;

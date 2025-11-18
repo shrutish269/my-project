@@ -1,15 +1,23 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-const productSchema = new mongoose.Schema({
-  name: String,
+const productSchema = new Schema({
+  name: { type: String, required: true },
+  slug: { type: String, required: true, unique: true },
   description: String,
-  price: Number,
-  inStock: Boolean,
-  category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now }
+  price: { type: Number, required: true },
+  currency: { type: String, default: 'USD' },
+  inStock: { type: Boolean, default: true },
+  quantity: { type: Number, default: 0 },
+  categoryId: { type: Schema.Types.ObjectId, ref: 'Category' },
+  attributes: { type: Schema.Types.Mixed, default: {} },
+  popularity: { type: Number, default: 0 },
+  createdAt: { type: Date, default: Date.now }
 });
 
-productSchema.index({ name: "text", description: "text" }); // for search
+// Text index for search
+productSchema.index({ name: 'text', description: 'text' });
+// Compound indexes to support filtering & sorting
+productSchema.index({ categoryId: 1, price: 1, createdAt: -1 });
 
-export default mongoose.model("Product", productSchema);
+module.exports = mongoose.models.Product || mongoose.model('Product', productSchema);

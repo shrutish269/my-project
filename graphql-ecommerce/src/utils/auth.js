@@ -1,17 +1,19 @@
-import jwt from "jsonwebtoken";
-import { JWT_SECRET } from "../config.js";
-import User from "../models/User.js";
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 
-export const getUserFromToken = async (token) => {
-  if (!token) return null;
+function signToken(user) {
+  return jwt.sign({ sub: user._id ? user._id.toString() : user.id, role: user.role }, config.JWT_SECRET, { expiresIn: '7d' });
+}
+
+async function getUserFromToken(header) {
+  if (!header) return null;
+  const token = (header || '').replace('Bearer ', '').trim();
   try {
-    const decoded = jwt.verify(token.replace("Bearer ", ""), JWT_SECRET);
-    return await User.findById(decoded._id);
-  } catch {
+    const payload = jwt.verify(token, config.JWT_SECRET);
+    return { id: payload.sub, role: payload.role };
+  } catch (e) {
     return null;
   }
-};
+}
 
-export const createToken = (user) => {
-  return jwt.sign({ _id: user._id, role: user.role }, JWT_SECRET, { expiresIn: "7d" });
-};
+module.exports = { signToken, getUserFromToken };

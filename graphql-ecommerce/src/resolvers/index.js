@@ -1,19 +1,17 @@
-import productResolvers from "./product.js";
-import categoryResolvers from "./category.js";
-import orderResolvers from "./order.js";
-import userResolvers from "./user.js";
+const { DateTime, JSON } = require('../scalars');
+const Query = require('./Query');
+const Mutation = require('./Mutation');
 
-export default {
-  Query: {
-    ...productResolvers.Query,
-    ...categoryResolvers.Query,
-    ...orderResolvers.Query,
-    ...userResolvers.Query
-  },
-  Mutation: {
-    ...productResolvers.Mutation,
-    ...categoryResolvers.Mutation,
-    ...orderResolvers.Mutation,
-    ...userResolvers.Mutation
-  }
+module.exports = {
+  DateTime,
+  JSON,
+  Query,
+  Mutation,
+
+  Product: require('./types/Product'),
+  Category: require('./types/Category'),
+  Order: require('./types/Order'),
+  User: require('./types/User'),
+  CartItem: require('./types/CartItem'),
+  OrderItem: require('./types/OrderItem')
 };

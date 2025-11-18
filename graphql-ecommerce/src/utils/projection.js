@@ -1,25 +1,20 @@
-function getProjectionFromInfo(info) {
-  // simple recursive traversal to collect top-level fields requested
+// Safe projection: always include required fields for resolvers
+const REQUIRED_FIELDS = ["name", "slug", "price", "currency", "inStock", "quantity", "createdAt", "categoryId"];
+
+function buildProjection(info) {
+  if (!info || !info.fieldNodes || !info.fieldNodes.length) return null;
   const fields = {};
-  const fieldNodes = info.fieldNodes || info.fieldASTs;
-  if (!fieldNodes) return null;
-
-  function collect(selection) {
-    if (!selection.selectionSet) return;
-    for (const sel of selection.selectionSet.selections) {
-      if (sel.kind === 'Field') {
-        fields[sel.name.value] = 1;
-      } else if (sel.kind === 'InlineFragment' || sel.kind === 'FragmentSpread') {
-        // skip fragments for brevity (could be expanded)
-      }
+  const node = info.fieldNodes[0];
+  const selections = node.selectionSet ? node.selectionSet.selections : [];
+  selections.forEach(sel => {
+    if (sel.kind === "Field" && sel.name && sel.name.value) {
+      const name = sel.name.value;
+      if (name !== "__typename") fields[name] = 1;
     }
-  }
-
-  for (const node of fieldNodes) {
-    collect(node);
-  }
-
+  });
+  REQUIRED_FIELDS.forEach(f => fields[f] = 1);
+  fields._id = 1;
   return fields;
 }
 
-module.exports = { getProjectionFromInfo };
+module.exports = { buildProjection };

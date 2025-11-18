@@ -1,19 +1,27 @@
-version: '3'
+version: '3.8'
 services:
   mongo:
-    image: mongo
+    image: mongo:6.0
+    restart: unless-stopped
     ports:
-      - "27017:27017"
+      - '27017:27017'
     volumes:
       - mongo-data:/data/db
+    command: ["--bind_ip_all"]
+
   api:
     build: .
-    command: npm run dev
-    volumes:
-      - .:/app
-    ports:
-      - "4000:4000"
+    depends_on:
+      - mongo
     environment:
-      - MONGO_URI=mongodb://mongo:27017/ecommerce
+      - NODE_ENV=development
+      - MONGODB_URI=mongodb://mongo:27017/graphql_ecommerce
+      - JWT_SECRET=yoursupersecretkey123
+    ports:
+      - '4000:4000'
+    volumes:
+      - ./:/usr/src/app
+    command: sh -c "npm run dev"
+
 volumes:
   mongo-data:

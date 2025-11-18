@@ -1,11 +1,17 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-const userSchema = new mongoose.Schema({
-  username: String,
-  email: String,
-  password: String,
-  role: { type: String, default: "customer" },
-  createdAt: { type: Date, default: Date.now }
-});
+const CartItemSchema = new Schema({
+  productId: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
+  quantity: { type: Number, default: 1, min: 1 }
+}, { _id: false });
 
-export default mongoose.model("User", userSchema);
+const userSchema = new Schema({
+  name: { type: String, default: 'Normal User' },
+  email: { type: String, unique: true, required: true },
+  password: { type: String, required: true },
+  role: { type: String, enum: ['ADMIN', 'CUSTOMER'], default: 'CUSTOMER' },
+  cart: { type: [CartItemSchema], default: [] }
+}, { timestamps: true });
+
+module.exports = mongoose.models.User || mongoose.model('User', userSchema);
